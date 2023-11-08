@@ -106,3 +106,21 @@ btnHotelsRestaurants.addEventListener("click", () => {
     });
   });
 });
+/*****Partie ou l'utilisateur et conecté*****/
+// Récupérez la valeur du token dans le local storage
+const userToken = localStorage.getItem("loged");
+const logOut = document.querySelector("header .log a");
+// Vérifiez si le token est présent et non nul
+if (userToken) {
+  // L'utilisateur est connecté
+  logOut.textContent = "log Out";
+  console.log("L'utilisateur est connecté");
+} else {
+  // L'utilisateur n'est pas connecté
+  console.log("L'utilisateur n'est pas connecté");
+}
+
+/****Suprimer le userToken du local storage si click sur log Out******/
+logOut.addEventListener("click", () => {
+  window.localStorage.loged = "";
+});

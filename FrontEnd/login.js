@@ -27,6 +27,9 @@ form.addEventListener("submit", (e) => {
       if (!response.ok) {
         email.style.border = "2px solid #FF0000";
         password.style.border = "2px solid #FF0000";
+        const errorLogin = document.querySelector("p");
+        errorLogin.textContent =
+          "Le mot de passe ou l'identifiant que vous avez fourni est incorrect.";
         throw new Error("Je ne suis pas Admin");
       }
       return response.json(); // Cela parse la réponse JSON
@@ -36,6 +39,7 @@ form.addEventListener("submit", (e) => {
       console.log(data);
       const userID = data.userId;
       const userToken = data.token;
+      window.localStorage.loged = userToken;
       console.log("user ID: " + userID);
       console.log("user Token: " + userToken);
       if (userEmail === "sophie.bluel@test.tld" && userPassword === "S0phie") {

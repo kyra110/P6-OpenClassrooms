@@ -320,3 +320,6 @@ footer nav ul {
   display: flex;
   justify-content: center;
 }
+.errorLogin{
+  color: #ff0000;
+}
