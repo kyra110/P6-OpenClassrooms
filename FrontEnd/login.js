@@ -4,6 +4,7 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const tokenAdmin =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5OTQ2MDAxOCwiZXhwIjoxNjk5NTQ2NDE4fQ.P6XFYlRipnxbdLSMTWWlccNH-VgCR4j3ODXEgaj4F3Q";
+
 /********Ecouteur d'évènement du Form de conexion***********/
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -24,6 +25,8 @@ form.addEventListener("submit", (e) => {
     // recupération de la réponse de la base de donnée
     .then((response) => {
       if (!response.ok) {
+        email.style.border = "2px solid #FF0000";
+        password.style.border = "2px solid #FF0000";
         throw new Error("Je ne suis pas Admin");
       }
       return response.json(); // Cela parse la réponse JSON
@@ -37,9 +40,9 @@ form.addEventListener("submit", (e) => {
       console.log("user Token: " + userToken);
       if (userEmail === "sophie.bluel@test.tld" && userPassword === "S0phie") {
         console.log("je suis admin");
+        email.style.border = "2px solid green";
+        password.style.border = "2px solid green";
         window.location.href = "index.html";
-      } else {
-        console.log("je ne suis pas admin");
       }
     })
     .catch((error) => {
