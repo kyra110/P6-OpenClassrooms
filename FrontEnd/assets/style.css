@@ -106,12 +106,8 @@ section {
   display: block;
 }
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   line-height: 1;
   background-color: #fefef8;
-  height: 100vh;
 }
 ol,
 ul {
@@ -227,7 +223,7 @@ li:hover {
   gap: 15px;
   height: 100px;
 }
-.container-filtres button {
+.buttons-filtres {
   background-color: #fefef8;
   padding: 9px 20px;
   border: 1px solid #1d6154;
@@ -238,7 +234,7 @@ li:hover {
   font-family: Syne;
   cursor: pointer;
 }
-.container-filtres button:focus {
+.active {
   background-color: #1d6154;
   color: white;
 }
@@ -312,6 +308,9 @@ footer nav ul {
 /******************Page login************************/
 
 /*lien Mot de passe oublié du form de conexion*/
+.main-login {
+  height: 750px;
+}
 .form__lien {
   color: black;
   font-weight: 700;
@@ -320,6 +319,18 @@ footer nav ul {
   display: flex;
   justify-content: center;
 }
-.errorLogin{
+.errorLogin {
   color: #ff0000;
+}
+
+/*Mode admin editeur*/
+.admin-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 50px;
+}
+.admin-edit p {
+  color: white;
 }
