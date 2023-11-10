@@ -322,6 +322,9 @@ footer nav ul {
 .errorLogin {
   color: #ff0000;
 }
+#login-link {
+  cursor: pointer;
+}
 
 /*Mode admin editeur*/
 .admin-edit {
