@@ -48,6 +48,7 @@ function displayWorksDom() {
     });
   });
 }
+
 function createWork(work) {
   const figure = document.createElement("figure");
   const img = document.createElement("img");
@@ -58,6 +59,7 @@ function createWork(work) {
   figure.appendChild(figcaption);
   gallery.appendChild(figure);
 }
+
 /*****Création des bouton dynamiquement******/
 /*Boucle for pour creer les bouton par catégorie*/
 function creationButtons() {
@@ -77,6 +79,7 @@ function categoryContentButton(category) {
   console.log(category.id);
   console.log(category.name);
 }
+
 /*Creation d'évènement sur le container filtres*/
 //gère la classe active & remet a zéro l'affichage des works
 containerFiltres.addEventListener("click", function (event) {
@@ -102,6 +105,7 @@ containerFiltres.addEventListener("click", function (event) {
     });
   });
 });
+
 function createWork(work) {
   const figure = document.createElement("figure");
   const img = document.createElement("img");
@@ -112,6 +116,7 @@ function createWork(work) {
   figure.appendChild(figcaption);
   gallery.appendChild(figure);
 }
+
 // Vérifiez si l'utilisateur est conecté ou non
 /*****Partie ou l'utilisateur et conecté*****/
 function logginAdmin() {
@@ -125,7 +130,7 @@ function logginAdmin() {
     divEdit.appendChild(sectionPortfolioH2);
     divEdit.appendChild(spanEdit);
     sectionPortfolio.prepend(divEdit);
-    // document.body.insertAdjacentHTML("afterbegin", adminConexion);
+    containerFiltres.style = "display:none";
   } else {
     // L'utilisateur n'est pas connecté
     console.log("L'utilisateur n'est pas connecté");

@@ -39,3 +39,14 @@
     }
   }
 }
+/****************Utilisateur conectée****************/
+.div-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5em;
+  gap: 10px;
+  span {
+    cursor: pointer;
+  }
+}

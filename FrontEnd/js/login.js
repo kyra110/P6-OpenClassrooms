@@ -30,6 +30,7 @@ function userLog() {
     })
       // recupération de la réponse de la base de donnée
       .then((response) => {
+        console.log(response);
         if (!response.ok) {
           email.style.border = "2px solid #FF0000";
           password.style.border = "2px solid #FF0000";
@@ -38,10 +39,17 @@ function userLog() {
             "Le mot de passe ou l'identifiant que vous avez fourni est incorrect.";
           throw new Error("Je ne suis pas Admin");
         }
+        if (response.ok) {
+          console.log("je suis admin");
+          email.style.border = "2px solid green";
+          password.style.border = "2px solid green";
+          logOut.textContent = "logout";
+          window.location.href = "index.html";
+        }
         return response.json(); // Cela parse la réponse JSON
       })
       .then((data) => {
-        // Vous pouvez maintenant utiliser les données dans la variable "data"
+        // Initialisation des donnés Token et id de l'utilisateur
         console.log(data);
         const userID = data.userId;
         const userToken = data.token;
@@ -49,19 +57,10 @@ function userLog() {
         localStorage.setItem("isLoggedIn", "true");
         console.log("user ID: " + userID);
         console.log("user Token: " + userToken);
-        if (
-          userEmail === "sophie.bluel@test.tld" &&
-          userPassword === "S0phie"
-        ) {
-          console.log("je suis admin");
-          email.style.border = "2px solid green";
-          password.style.border = "2px solid green";
-          logOut.textContent = "log Out";
-          window.location.href = "index.html";
-        }
       })
       .catch((error) => {
         console.error("Une erreur est survenue : ", error);
       });
   });
 }
+console.log(userID, userToken);
