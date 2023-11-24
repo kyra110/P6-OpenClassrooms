@@ -8,9 +8,11 @@ async function fetchWorksModal() {
 }
 
 function mainModal() {
-  displayModalGallery();
-  displayWorksModal();
-  closeModalGallery();
+  if (isLoggedIn) {
+    displayModalGallery();
+    displayWorksModal();
+    closeModalGallery();
+  }
 }
 mainModal();
 // Affichage Modal Gallery
@@ -92,10 +94,13 @@ function deleteWork(trash, modalGallery) {
   trash.addEventListener("click", (e) => {
     const workID = trash.id;
     console.log(trash);
-    fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID);
-    modalGallery.innerHTML = "";
-    gallery.innerHTML = "";
-    displayWorksModal();
-    displayWorksDom();
+    fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
+      () => {
+        modalGallery.innerHTML = "";
+        gallery.innerHTML = "";
+        displayWorksModal();
+        displayWorksDom();
+      }
+    );
   });
 }
