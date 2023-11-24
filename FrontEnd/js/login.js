@@ -40,27 +40,24 @@ function userLog() {
           throw new Error("Je ne suis pas Admin");
         }
         if (response.ok) {
-          console.log("je suis admin");
-          email.style.border = "2px solid green";
-          password.style.border = "2px solid green";
-          logOut.textContent = "logout";
+          // console.log("je suis admin");
           window.location.href = "index.html";
         }
         return response.json(); // Cela parse la réponse JSON
       })
       .then((data) => {
-        // Initialisation des donnés Token et id de l'utilisateur
+        // Récupération des donnés Token et id de l'utilisateur une fois la response terminé
         console.log(data);
         const userID = data.userId;
         const userToken = data.token;
-        window.localStorage.loged = userToken;
-        localStorage.setItem("isLoggedIn", "true");
-        console.log("user ID: " + userID);
-        console.log("user Token: " + userToken);
+        window.localStorage.token = userToken;
+        window.localStorage.loged = true;
+        // localStorage.setItem("isLoggedIn", "true");
+        // console.log("user ID: " + userID);
+        // console.log("user Token: " + userToken);
       })
       .catch((error) => {
         console.error("Une erreur est survenue : ", error);
       });
   });
 }
-console.log(userID, userToken);

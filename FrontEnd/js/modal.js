@@ -1,52 +1,36 @@
 // @ts-nocheck
 // Variables Globales
 const modalContent = document.getElementById("modalContent");
-/* Chercher le tableau de works avec une requête à l'API */
-async function fetchWorksModal() {
-  const requete = await fetch("http://localhost:5678/api/works");
-  return requete.json();
-}
-
+const modalGallery = document.querySelector(".modalGallery");
+//Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
-  if (isLoggedIn) {
-    displayModalGallery();
+  if (loged) {
+    displayModal();
     displayWorksModal();
     closeModalGallery();
   }
 }
 mainModal();
-// Affichage Modal Gallery
-function displayModalGallery() {
+
+// Affichage de la Modal uniquement si conecté grace au click sur le bouton modifié
+function displayModal() {
   const modeEdition = document.querySelector(".div-edit span");
-  // Votre code ici
-  modalContent.innerHTML = `
-  <section class="modalPortfolio">
-  <span><i class="fa-solid fa-xmark"></i></span>
-  <h2>Galerie Photo</h2>
-  <div class="modalGallery">
-  </div>
-  <div class="container-button ">
-  <button class="buttons">Ajouter une photo</button>
-  </div>
-  </section>
-  `;
   modeEdition.addEventListener("click", () => {
     console.log("mode édition click");
     modalContent.style.display = "flex";
   });
 }
-/* affichage des works dans le Portfolio */
+// récupération des works & appel de la fonction de création de works dans la gallery de la modal
 function displayWorksModal() {
-  fetchWorksModal().then((data) => {
-    //cree pour chaque élément du tableau
-    // console.log(data);
-    data.forEach((work) => {
+  fetchWorks().then((works) => {
+    //Boucle qui parcours  nos works
+    works.forEach((work) => {
       createWorkModal(work);
     });
   });
 }
+// création des balises et injection des donnés a partir du fetchWorks
 function createWorkModal(work) {
-  const modalGallery = document.querySelector(".modalGallery");
   const figure = document.createElement("figure");
   const img = document.createElement("img");
   const trash = document.createElement("span");
@@ -56,7 +40,7 @@ function createWorkModal(work) {
   figure.appendChild(img);
   figure.appendChild(trash);
   modalGallery.appendChild(figure);
-  deleteWork(trash, modalGallery);
+  deleteWork(trash);
 }
 
 //Fermuture de la modal sur la croix
@@ -75,11 +59,12 @@ function closeModalGallery() {
   });
 }
 
-//***********************************Supression de la photo de la Modal*******************************
+//Supression des works grace a la méthode DELETE & au Token user depuis la poubelle de la modale
 
-const token = window.localStorage.loged;
+const token = window.localStorage.token;
 console.log(token);
 
+//Objet de paramétrage pour requette DELETE avec token
 const deleteWorkID = {
   method: "DELETE",
   headers: {
@@ -90,7 +75,8 @@ const deleteWorkID = {
   credentials: "same-origin",
 };
 
-function deleteWork(trash, modalGallery) {
+//Supéssion au click sur la poubelle et mise a jour modale et gallery principale
+function deleteWork(trash) {
   trash.addEventListener("click", (e) => {
     const workID = trash.id;
     console.log(trash);
@@ -99,7 +85,7 @@ function deleteWork(trash, modalGallery) {
         modalGallery.innerHTML = "";
         gallery.innerHTML = "";
         displayWorksModal();
-        displayWorksDom();
+        displayWorksGallery();
       }
     );
   });
