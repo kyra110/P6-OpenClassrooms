@@ -22,7 +22,7 @@ function displayModal() {
 }
 // récupération des works & appel de la fonction de création de works dans la gallery de la modal
 function displayWorksModal() {
-  fetchWorks().then((works) => {
+  getWorks().then((works) => {
     //Boucle qui parcours  nos works
     works.forEach((work) => {
       createWorkModal(work);

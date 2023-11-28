@@ -1,8 +1,5 @@
 // @ts-nocheck
 /* Variables */
-const btnObjects = document.querySelector(".objects");
-const btnApartment = document.querySelector(".apartment");
-const btnHotelsRestaurants = document.querySelector(".hotels-restaurants");
 const gallery = document.querySelector(".gallery");
 const body = document.querySelector("body");
 const containerFiltres = document.querySelector(".container-filtres");
@@ -13,26 +10,26 @@ const sectionPortfolio = document.querySelector("#portfolio");
 const sectionPortfolioH2 = document.querySelector("#portfolio h2");
 const adminText = "Mode édition";
 const adminLogo = `<i class="fa-regular fa-pen-to-square"></i>`;
+const adminConexionUP = `<div class="admin-edit">
+<p>${adminLogo}${adminText}</p>
+</div>`;
 const divEdit = document.createElement("div");
 const spanEdit = document.createElement("span");
 const adminConexionDown = `${adminLogo}  ${adminText} `;
-const adminConexion = `<div class="admin-edit">
-<p>${adminLogo}${adminText}</p>
-</div>`;
 
 /* Chercher le tableau de works avec une requête à l'API */
-async function fetchWorks() {
+async function getWorks() {
   const requete = await fetch("http://localhost:5678/api/works");
   return requete.json();
 }
-async function fetchCategory() {
+async function getCategory() {
   const requete = await fetch("http://localhost:5678/api/categories");
   return requete.json();
 }
 
-function main() {
+async function main() {
   displayWorksGallery();
-  creationButtons();
+  createAllButtons();
   logginAdmin();
   logoutAdmin();
 }
@@ -40,7 +37,7 @@ main();
 
 /* affichage des works dans le dom */
 function displayWorksGallery() {
-  fetchWorks().then((data) => {
+  getWorks().then((data) => {
     //cree pour chaque élément du tableau
     // console.log(data);
     data.forEach((work) => {
@@ -62,15 +59,15 @@ function createWork(work) {
 
 /*****Création des bouton dynamiquement******/
 /*Boucle for pour creer les bouton par catégorie*/
-function creationButtons() {
-  fetchCategory().then((data) => {
+function createAllButtons() {
+  getCategory().then((data) => {
     console.log(data);
     data.forEach((category) => {
-      categoryContentButton(category);
+      createButton(category);
     });
   });
 }
-function categoryContentButton(category) {
+function createButton(category) {
   const btn = document.createElement("button");
   btn.classList.add("buttons-filtres");
   btn.textContent = category.name;
@@ -80,43 +77,31 @@ function categoryContentButton(category) {
   console.log(category.name);
 }
 
-/*Creation d'évènement sur le container filtres*/
-//gère la classe active & remet a zéro l'affichage des works
-containerFiltres.addEventListener("click", function (event) {
-  if (event.target.classList.contains("buttons-filtres")) {
-    document.querySelectorAll(".buttons-filtres").forEach(function (btn) {
-      btn.classList.remove("active");
-    });
-    event.target.classList.add("active");
-    gallery.innerHTML = "";
-  }
-  //creation des works a partir de la catégory et id button
-  const idValue = event.target.id;
-  fetchWorks().then((works) => {
-    works.forEach((work) => {
-      //creation d'un work que si son id et egal a la catégory
-      //car on filtre les catégories différentes
-      if (idValue == work.categoryId) {
-        createWork(work);
-      }
-      if (idValue == 0) {
-        createWork(work);
-      }
+// Trie par classe sur les boutons filtres
+async function displayByCategory() {
+  const works = await getWorks();
+  const buttons = document.querySelectorAll(".container-filtres button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      buttons.forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      button.classList.add("active");
+      const btnId = e.target.id;
+      gallery.innerHTML = "";
+      works.forEach((work) => {
+        if (btnId == work.categoryId) {
+          createWork(work);
+        }
+        if (btnId == "0") {
+          createWork(work);
+        }
+      });
     });
   });
-});
-
-function createWork(work) {
-  const figure = document.createElement("figure");
-  const img = document.createElement("img");
-  const figcaption = document.createElement("figcaption");
-  figcaption.textContent = work.title;
-  img.src = work.imageUrl;
-  figure.appendChild(img);
-  figure.appendChild(figcaption);
-  gallery.appendChild(figure);
+  console.log(buttons);
 }
-
+displayByCategory();
 // Vérifiez si l'utilisateur est conecté ou non
 /*****Partie ou l'utilisateur et conecté*****/
 function logginAdmin() {
@@ -124,7 +109,7 @@ function logginAdmin() {
     // Modifications si L'utilisateur est connecté
     console.log("L'utilisateur est connecté");
     logOut.textContent = "logout";
-    document.body.insertAdjacentHTML("beforebegin", adminConexion);
+    document.body.insertAdjacentHTML("beforebegin", adminConexionUP);
     spanEdit.innerHTML = adminConexionDown;
     divEdit.classList.add("div-edit");
     divEdit.appendChild(sectionPortfolioH2);

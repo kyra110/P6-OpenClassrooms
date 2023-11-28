@@ -309,6 +309,11 @@ footer nav ul {
   font-size: 1.5rem;
   cursor: pointer;
 }
+.modalPortfolio h3 {
+  margin-top: 60px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 .modalPortfolio h2 {
   margin-top: 50px;
   color: black;
