@@ -297,7 +297,7 @@ footer nav ul {
   justify-content: space-evenly;
   background-color: white;
   border-radius: 5px;
-  width: 35%;
+  width: 40%;
   height: 75%;
   position: relative;
   min-height: 500px;
@@ -393,7 +393,7 @@ footer nav ul {
 }
 
 .modalAddWorks {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -402,7 +402,7 @@ footer nav ul {
   background-color: white;
   border-radius: 5px;
   position: relative;
-  width: 35%;
+  width: 40%;
   height: 75%;
 }
 .modalAddWorks .arrow-left {
@@ -412,6 +412,7 @@ footer nav ul {
 }
 .modalAddWorks .arrow-left .fa-arrow-left {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .modalAddWorks .xmark {
   position: absolute;
@@ -420,6 +421,7 @@ footer nav ul {
 }
 .modalAddWorks .xmark .fa-xmark {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .modalAddWorks h3 {
   margin-top: 60px;
@@ -456,6 +458,7 @@ footer nav ul {
   height: 30px;
   padding: 0 20px;
   color: #306685;
+  cursor: pointer;
 }
 .modalAddWorks form .containerAddPhoto input {
   display: none;

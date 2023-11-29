@@ -2,12 +2,26 @@
 // Variables Globales
 const modalContent = document.getElementById("modalContent");
 const modalGallery = document.querySelector(".modalGallery");
+//Variables pour l'affichage de la deuxieme mmodale partie
+const buttonAddPhoto = document.querySelector(".container-button button");
+const modalPortfolio = document.querySelector(".modalPortfolio");
+const modalAddWorks = document.querySelector(".modalAddWorks");
+//Variables Pour le form
+const formAddWorks = document.querySelector(".modalAddWorks form");
+const inputTitle = document.querySelector(".modalAddWorks form #title");
+const inputCategory = document.querySelector(
+  ".modalAddWorks form #categoryInput"
+);
+const inputFile = document.querySelector(".modalAddWorks form #file");
+
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
   if (loged) {
     displayModal();
     displayWorksModal();
     closeModalGallery();
+    displayAddWorks();
+    returnToModalPortfolio();
   }
 }
 mainModal();
@@ -18,6 +32,8 @@ function displayModal() {
   modeEdition.addEventListener("click", () => {
     console.log("mode édition click");
     modalContent.style.display = "flex";
+    modalPortfolio.style.display = "flex";
+    modalAddWorks.style.display = "none";
   });
 }
 // récupération des works & appel de la fonction de création de works dans la gallery de la modal
@@ -42,11 +58,16 @@ function createWorkModal(work) {
   modalGallery.appendChild(figure);
   deleteWork(trash);
 }
-
-//Fermuture de la modal sur la croix
+//Gestion de la fermeture des modales
 function closeModalGallery() {
+  //Fermuture de la modal sur la croix 1
   const xmarkModal = document.querySelector(".modalPortfolio span .fa-xmark");
   xmarkModal.addEventListener("click", () => {
+    modalContent.style.display = "none";
+  });
+  //Fermuture de la modal sur la croix 2
+  const xmarkModal2 = document.querySelector(".modalAddWorks span .fa-xmark");
+  xmarkModal2.addEventListener("click", () => {
     modalContent.style.display = "none";
   });
 
@@ -90,3 +111,37 @@ function deleteWork(trash) {
     );
   });
 }
+
+//fonction d'affichage au click sur btn:"ajouter-photo" de la modalAddWorks
+function displayAddWorks() {
+  buttonAddPhoto.addEventListener("click", () => {
+    modalPortfolio.style.display = "none";
+    modalAddWorks.style.display = "flex";
+  });
+}
+
+// Retour sur modalPortfolio depuis la flèche de la modalAddWorks
+function returnToModalPortfolio() {
+  const arrowLeftModalWorks = document.querySelector(
+    ".modalAddWorks .fa-arrow-left"
+  );
+  arrowLeftModalWorks.addEventListener("click", () => {
+    modalPortfolio.style.display = "flex";
+    modalAddWorks.style.display = "none";
+  });
+}
+
+// Récupération des Valeurs du Formulaire
+formAddWorks.addEventListener("submit", (e) => {
+  e.preventDefault();
+  workTitle = inputTitle.value;
+  workCategory = inputCategory.value;
+  workFile = inputFile.value;
+  newWork = {
+    title: workTitle,
+    imageUrl: workFile,
+    categoryId: workCategory,
+  };
+  // createWork(newWork);
+  console.log(newWork);
+});

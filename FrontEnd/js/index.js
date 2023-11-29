@@ -39,7 +39,7 @@ main();
 function displayWorksGallery() {
   getWorks().then((data) => {
     //cree pour chaque élément du tableau
-    // console.log(data);
+    console.log(data);
     data.forEach((work) => {
       createWork(work);
     });
