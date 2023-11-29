@@ -49,11 +49,38 @@
 				<section class="modalPortfolio">
 					<span><i class="fa-solid fa-xmark"></i></span>
 					<h3>Galerie Photo</h3>
-					<div class="modalGallery">
+					<div class="container-gallery-button">
+						<div class="modalGallery">
+						</div>
+						<div class="container-button ">
+							<button class="buttons">Ajouter une photo</button>
+						</div>
 					</div>
-					<div class="container-button ">
-						<button class="buttons">Ajouter une photo</button>
-					</div>
+				</section>
+				<section class="modalAddWorks">
+					<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
+					<span class="xmark"><i class="fa-solid fa-xmark"></i></span>
+					<h3>Ajout photo</h3>
+					<form action="submit">
+						<div class="containerAddPhoto">
+							<i class="fa-regular fa-image"></i>
+							<label for="file" class="labelFile">+ Ajouter photo</label>
+							<p>jpg,png : 4mo max</p>
+							<input type="file" name="file" id="file">
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" id="title">
+						<label for="categoryInput">Catégorie</label>
+						<input list="categories" id="categoryInput" name="category">
+						<datalist id="categories">
+							<option value="objets">
+							<option value="appartements">
+							<option value="hotelRestaurants">
+						</datalist>
+						<div class="container-button-add-work ">
+							<button class="button-add-work">Valider</button>
+						</div>
+					</form>
 				</section>
 			</div>
 			<div class="container-filtres">
