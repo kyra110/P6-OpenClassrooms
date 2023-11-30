@@ -11,10 +11,10 @@ const formAddWorks = document.querySelector(".modalAddWorks form");
 const inputTitle = document.querySelector("#title");
 const inputCategory = document.querySelector("#categoryInput");
 const inputFile = document.querySelector("#file");
-const token = window.sessionStorage.token;
+const token = window.sessionStorage.getItem("token");
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
-  if (loged) {
+  if (logged) {
     displayModal();
     displayWorksModal();
     closeModalGallery();
