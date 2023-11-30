@@ -61,22 +61,21 @@
 					<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
 					<span class="xmark"><i class="fa-solid fa-xmark"></i></span>
 					<h3>Ajout photo</h3>
-					<form action="submit">
+					<form>
 						<div class="containerAddPhoto">
 							<i class="fa-regular fa-image"></i>
 							<label for="file" class="labelFile">+ Ajouter photo</label>
 							<p>jpg,png : 4mo max</p>
-							<input type="file" name="file" id="file">
+							<input type="file" name="imageUrl" id="file" accept="image/jpg, image/png" required>
 						</div>
 						<label for="title">Titre</label>
-						<input type="text" id="title">
+						<input type="text" name="title" id="title" required>
 						<label for="categoryInput">Catégorie</label>
-						<input list="categories" id="categoryInput" name="category">
-						<datalist id="categories">
-							<option value="Objets">
-							<option value="Appartements">
-							<option value="Hotels & restaurants">
-						</datalist>
+						<select list="categories" id="categoryInput" name="category" required>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hotels & restaurants</option>
+						</select>
 						<div class="container-button-add-work ">
 							<button class="button-add-work">Valider</button>
 						</div>

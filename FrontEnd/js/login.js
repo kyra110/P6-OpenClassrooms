@@ -50,9 +50,9 @@ function userLog() {
         console.log(data);
         const userID = data.userId;
         const userToken = data.token;
-        window.localStorage.token = userToken;
-        window.localStorage.loged = true;
-        // localStorage.setItem("isLoggedIn", "true");
+        window.sessionStorage.token = userToken;
+        window.sessionStorage.loged = true;
+        window.sessionStorage.userId = userID;
         // console.log("user ID: " + userID);
         // console.log("user Token: " + userToken);
       })

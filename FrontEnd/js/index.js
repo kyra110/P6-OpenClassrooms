@@ -4,7 +4,7 @@ const gallery = document.querySelector(".gallery");
 const body = document.querySelector("body");
 const containerFiltres = document.querySelector(".container-filtres");
 // Variables pour la partie conexion
-const loged = window.localStorage.loged === "true";
+const loged = window.sessionStorage.loged;
 const logOut = document.getElementById("login-link");
 const sectionPortfolio = document.querySelector("#portfolio");
 const sectionPortfolioH2 = document.querySelector("#portfolio h2");
@@ -37,6 +37,7 @@ main();
 
 /* affichage des works dans le dom */
 function displayWorksGallery() {
+  gallery.innerHTML = "";
   getWorks().then((data) => {
     //cree pour chaque élément du tableau
     console.log(data);
@@ -102,10 +103,10 @@ async function displayByCategory() {
   console.log(buttons);
 }
 displayByCategory();
-// Vérifiez si l'utilisateur est conecté ou non
+
 /*****Partie ou l'utilisateur et conecté*****/
 function logginAdmin() {
-  if (loged) {
+  if (loged == "true") {
     // Modifications si L'utilisateur est connecté
     console.log("L'utilisateur est connecté");
     logOut.textContent = "logout";
@@ -126,10 +127,10 @@ function logginAdmin() {
 /****Suprimer le userToken du local storage si click sur log Out******/
 function logoutAdmin() {
   logOut.addEventListener("click", () => {
-    if (loged) {
-      window.localStorage.token = "";
+    if (loged === "true") {
+      window.sessionStorage.token = "";
       logOut.textContent = "login";
-      window.localStorage.loged = false;
+      window.sessionStorage.loged = false;
       window.location.href = "index.html";
     } else {
       //renvoi sur page conexion

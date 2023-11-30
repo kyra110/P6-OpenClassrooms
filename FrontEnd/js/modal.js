@@ -8,20 +8,19 @@ const modalPortfolio = document.querySelector(".modalPortfolio");
 const modalAddWorks = document.querySelector(".modalAddWorks");
 //Variables Pour le form
 const formAddWorks = document.querySelector(".modalAddWorks form");
-const inputTitle = document.querySelector(".modalAddWorks form #title");
-const inputCategory = document.querySelector(
-  ".modalAddWorks form #categoryInput"
-);
-const inputFile = document.querySelector(".modalAddWorks form #file");
-
+const inputTitle = document.querySelector("#title");
+const inputCategory = document.querySelector("#categoryInput");
+const inputFile = document.querySelector("#file");
+const token = window.sessionStorage.token;
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
   if (loged) {
     displayModal();
     displayWorksModal();
     closeModalGallery();
-    displayAddWorks();
+    displayModalAddWorks();
     returnToModalPortfolio();
+    addWorks();
   }
 }
 mainModal();
@@ -38,6 +37,7 @@ function displayModal() {
 }
 // récupération des works & appel de la fonction de création de works dans la gallery de la modal
 function displayWorksModal() {
+  modalGallery.innerHTML = "";
   getWorks().then((works) => {
     //Boucle qui parcours  nos works
     works.forEach((work) => {
@@ -82,7 +82,6 @@ function closeModalGallery() {
 
 //Supression des works grace a la méthode DELETE & au Token user depuis la poubelle de la modale
 
-const token = window.localStorage.token;
 console.log(token);
 
 //Objet de paramétrage pour requette DELETE avec token
@@ -103,8 +102,6 @@ function deleteWork(trash) {
     console.log(trash);
     fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
       () => {
-        modalGallery.innerHTML = "";
-        gallery.innerHTML = "";
         displayWorksModal();
         displayWorksGallery();
       }
@@ -113,7 +110,7 @@ function deleteWork(trash) {
 }
 
 //fonction d'affichage au click sur btn:"ajouter-photo" de la modalAddWorks
-function displayAddWorks() {
+function displayModalAddWorks() {
   buttonAddPhoto.addEventListener("click", () => {
     modalPortfolio.style.display = "none";
     modalAddWorks.style.display = "flex";
@@ -132,16 +129,38 @@ function returnToModalPortfolio() {
 }
 
 // Récupération des Valeurs du Formulaire
-formAddWorks.addEventListener("submit", (e) => {
-  e.preventDefault();
-  workTitle = inputTitle.value;
-  workCategory = inputCategory.value;
-  workFile = inputFile.value;
-  newWork = {
-    title: workTitle,
-    imageUrl: workFile,
-    categoryId: workCategory,
-  };
-  // createWork(newWork);
-  console.log(newWork);
-});
+
+function addWorks() {
+  formAddWorks.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", inputFile.files[0]);
+    formData.append("title", inputTitle.value);
+    formData.append("category", inputCategory.value);
+    console.log(inputFile.files[0]);
+    fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur lors de l'envoi du fichier");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fichier envoyé avec succès :", data);
+        displayWorksModal();
+        displayWorksGallery();
+        formAddWorks.reset();
+        modalPortfolio.style.display = "flex";
+        modalAddWorks.style.display = "none";
+      })
+      .catch((error) => {
+        console.error("Erreur :", error);
+      });
+  });
+}
