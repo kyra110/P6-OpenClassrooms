@@ -25,6 +25,8 @@ function userLog() {
     /****Envoi de la requette****/
     fetch("http://localhost:5678/api/users/login", {
       method: "POST",
+      mode: "cors",
+      credentials: "same-origin",
       headers: { "Content-Type": "application/json" },
       body: user,
     })
@@ -39,10 +41,6 @@ function userLog() {
             "Le mot de passe ou l'identifiant que vous avez fourni est incorrect.";
           throw new Error("Je ne suis pas Admin");
         }
-        if (response.ok) {
-          // console.log("je suis admin");
-          window.location.href = "index.html";
-        }
         return response.json(); // Cela parse la réponse JSON
       })
       .then((data) => {
@@ -50,11 +48,10 @@ function userLog() {
         console.log(data);
         const userID = data.userId;
         const userToken = data.token;
-        window.sessionStorage.setItem("token", userToken);
         window.sessionStorage.setItem("logged", true);
+        window.sessionStorage.setItem("token", userToken);
         window.sessionStorage.setItem("userId", userID);
-        // console.log("user ID: " + userID);
-        // console.log("user Token: " + userToken);
+        window.location.href = "index.html";
       })
       .catch((error) => {
         console.error("Une erreur est survenue : ", error);
