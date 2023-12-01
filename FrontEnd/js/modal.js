@@ -14,6 +14,7 @@ const inputFile = document.querySelector("#file");
 const token = window.sessionStorage.getItem("token");
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
+  displayCategoryModal();
   if (logged) {
     displayModal();
     displayWorksModal();
@@ -162,5 +163,17 @@ function addWorks() {
       .catch((error) => {
         console.error("Erreur :", error);
       });
+  });
+}
+//Fonction qui génère les catégorie dynamiquement pour la modale
+
+async function displayCategoryModal() {
+  const select = document.querySelector("form select");
+  const categorys = await getCategory();
+  categorys.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.name;
+    select.appendChild(option);
   });
 }
