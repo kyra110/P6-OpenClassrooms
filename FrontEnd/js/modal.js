@@ -24,6 +24,7 @@ function mainModal() {
     returnToModalPortfolio();
     addWorks();
     prevImg();
+    verifFormCompleted();
   }
 }
 mainModal();
@@ -132,7 +133,6 @@ function returnToModalPortfolio() {
 }
 
 // Récupération des Valeurs du Formulaire
-
 function addWorks() {
   formAddWorks.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -194,6 +194,21 @@ function prevImg() {
       reader.readAsDataURL(file);
     } else {
       previewImage.style.display = "none";
+    }
+  });
+}
+// fontion qui vérifie si tout les inputs sont remplis
+function verifFormCompleted() {
+  const buttonValidForm = document.querySelector(
+    ".container-button-add-work  button"
+  );
+  formAddWorks.addEventListener("input", () => {
+    if (!inputTitle.value == "" && !inputFile.files[0] == "") {
+      buttonValidForm.classList.remove("button-add-work");
+      buttonValidForm.classList.add("buttonValidForm");
+    } else {
+      buttonValidForm.classList.remove("buttonValidForm");
+      buttonValidForm.classList.add("button-add-work");
     }
   });
 }

@@ -469,7 +469,7 @@ footer nav ul {
   cursor: pointer;
 }
 .modalAddWorks form .containerAddPhoto input {
-  display: none;
+  opacity: 0;
 }
 .modalAddWorks form #title {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -486,6 +486,16 @@ footer nav ul {
   height: 100px;
   width: 100%;
   border-top: 1px solid gray;
+}
+.modalAddWorks form .container-button-add-work .buttonValidForm {
+  background-color: #1d6154;
+  padding: 9px 50px;
+  border-radius: 25px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: Syne;
+  cursor: pointer;
 }
 .modalAddWorks form .container-button-add-work .button-add-work {
   background-color: #a7a7a7;

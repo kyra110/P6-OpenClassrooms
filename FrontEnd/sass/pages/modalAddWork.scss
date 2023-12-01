@@ -72,7 +72,7 @@
         cursor: pointer;
       }
       input {
-        display: none;
+        opacity: 0;
       }
     }
     #title {
@@ -90,6 +90,16 @@
       height: 100px;
       width: 100%;
       border-top: 1px solid gray;
+      .buttonValidForm {
+        background-color: #1d6154;
+        padding: 9px 50px;
+        border-radius: 25px;
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        font-family: Syne;
+        cursor: pointer;
+      }
       .button-add-work {
         background-color: #a7a7a7;
         padding: 9px 50px;
