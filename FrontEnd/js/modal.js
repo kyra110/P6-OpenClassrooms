@@ -12,6 +12,7 @@ const inputTitle = document.querySelector("#title");
 const inputCategory = document.querySelector("#categoryInput");
 const inputFile = document.querySelector("#file");
 const token = window.sessionStorage.getItem("token");
+const previewImage = document.getElementById("previewImage");
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
   displayCategoryModal();
@@ -22,6 +23,7 @@ function mainModal() {
     displayModalAddWorks();
     returnToModalPortfolio();
     addWorks();
+    prevImg();
   }
 }
 mainModal();
@@ -159,14 +161,15 @@ function addWorks() {
         formAddWorks.reset();
         modalPortfolio.style.display = "flex";
         modalAddWorks.style.display = "none";
+        previewImage.style.display = "none";
       })
       .catch((error) => {
         console.error("Erreur :", error);
       });
   });
 }
-//Fonction qui génère les catégorie dynamiquement pour la modale
 
+//Fonction qui génère les catégorie dynamiquement pour la modale
 async function displayCategoryModal() {
   const select = document.querySelector("form select");
   const categorys = await getCategory();
@@ -175,5 +178,22 @@ async function displayCategoryModal() {
     option.value = category.id;
     option.textContent = category.name;
     select.appendChild(option);
+  });
+}
+//fonction prévisualisation de l'image
+function prevImg() {
+  inputFile.addEventListener("change", () => {
+    const file = inputFile.files[0];
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+        previewImage.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      previewImage.style.display = "none";
+    }
   });
 }
