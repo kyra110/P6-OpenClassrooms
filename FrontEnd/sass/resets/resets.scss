@@ -26,6 +26,12 @@ section {
 body {
   line-height: 1;
   background-color: #fefef8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main {
+  width: 80%;
 }
 ol,
 ul {

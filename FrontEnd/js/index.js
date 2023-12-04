@@ -110,7 +110,7 @@ function logginAdmin() {
     // Modifications si L'utilisateur est connecté
     console.log("L'utilisateur est connecté");
     logOut.textContent = "logout";
-    document.body.insertAdjacentHTML("beforebegin", adminConexionUP);
+    document.body.insertAdjacentHTML("afterbegin", adminConexionUP);
     spanEdit.innerHTML = adminConexionDown;
     divEdit.classList.add("div-edit");
     divEdit.appendChild(sectionPortfolioH2);

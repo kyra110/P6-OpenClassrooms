@@ -5,6 +5,7 @@ header {
   display: flex;
   justify-content: space-between;
   margin: 50px 0;
+  width: 90%;
   h1 {
     display: flex;
     flex-direction: column;
@@ -41,5 +42,17 @@ header {
         color: #b1663c;
       }
     }
+  }
+}
+/*Mode admin editeur*/
+.admin-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 50px;
+  width: 100%;
+  p {
+    color: white;
   }
 }
