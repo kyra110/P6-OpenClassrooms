@@ -40,7 +40,7 @@ function displayWorksGallery() {
   gallery.innerHTML = "";
   getWorks().then((data) => {
     //cree pour chaque élément du tableau
-    console.log(data);
+    // console.log(data);
     data.forEach((work) => {
       createWork(work);
     });
@@ -62,7 +62,7 @@ function createWork(work) {
 /*Boucle for pour creer les bouton par catégorie*/
 function createAllButtons() {
   getCategory().then((data) => {
-    console.log(data);
+    // console.log(data);
     data.forEach((category) => {
       createButton(category);
     });
@@ -74,8 +74,8 @@ function createButton(category) {
   btn.textContent = category.name;
   btn.id = category.id;
   containerFiltres.appendChild(btn);
-  console.log(category.id);
-  console.log(category.name);
+  // console.log(category.id);
+  // console.log(category.name);
 }
 
 // Trie par classe sur les boutons filtres
@@ -100,7 +100,7 @@ async function displayByCategory() {
       });
     });
   });
-  console.log(buttons);
+  // console.log(buttons);
 }
 displayByCategory();
 
@@ -119,7 +119,7 @@ function logginAdmin() {
     containerFiltres.style = "display:none";
   } else {
     // L'utilisateur n'est pas connecté
-    console.log("L'utilisateur n'est pas connecté");
+    // console.log("L'utilisateur n'est pas connecté");
     logOut.textContent = "login";
   }
 }

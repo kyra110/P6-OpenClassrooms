@@ -87,7 +87,7 @@ function closeModalGallery() {
 
 //Supression des works grace a la méthode DELETE & au Token user depuis la poubelle de la modale
 
-console.log(token);
+// console.log(token);
 
 //Objet de paramétrage pour requette DELETE avec token
 const deleteWorkID = {
