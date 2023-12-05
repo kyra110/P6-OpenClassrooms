@@ -131,6 +131,7 @@ function logoutAdmin() {
       window.sessionStorage.setItem("token", "");
       logOut.textContent = "login";
       window.sessionStorage.setItem("logged", false);
+      window.sessionStorage.setItem("userId", "");
       window.location.href = "index.html";
     } else {
       //renvoi sur page conexion
