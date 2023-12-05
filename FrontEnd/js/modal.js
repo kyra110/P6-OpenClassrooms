@@ -16,7 +16,8 @@ const previewImage = document.getElementById("previewImage");
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
   displayCategoryModal();
-  if (logged) {
+  if (logged == "true") {
+    console.log("logged");
     displayModal();
     displayWorksModal();
     closeModalGallery();
