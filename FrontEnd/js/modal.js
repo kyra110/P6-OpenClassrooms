@@ -17,7 +17,6 @@ const previewImage = document.getElementById("previewImage");
 function mainModal() {
   displayCategoryModal();
   if (logged == "true") {
-    console.log("logged");
     displayModal();
     displayWorksModal();
     closeModalGallery();

@@ -108,7 +108,7 @@ displayByCategory();
 function logginAdmin() {
   if (logged == "true") {
     // Modifications si L'utilisateur est connecté
-    console.log("L'utilisateur est connecté");
+    // console.log("L'utilisateur est connecté");
     logOut.textContent = "logout";
     document.body.insertAdjacentHTML("afterbegin", adminConexionUP);
     spanEdit.innerHTML = adminConexionDown;
