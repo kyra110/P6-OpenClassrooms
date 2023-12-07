@@ -4,7 +4,8 @@ const gallery = document.querySelector(".gallery");
 const body = document.querySelector("body");
 const containerFiltres = document.querySelector(".container-filtres");
 // Variables pour la partie conexion
-const logged = window.sessionStorage.getItem("logged");
+const token = window.sessionStorage.getItem("token");
+const user = window.sessionStorage.getItem("userId");
 const logOut = document.getElementById("login-link");
 const sectionPortfolio = document.querySelector("#portfolio");
 const sectionPortfolioH2 = document.querySelector("#portfolio h2");
@@ -107,7 +108,7 @@ displayByCategory();
 
 /*****Partie ou l'utilisateur et conecté*****/
 function logginAdmin() {
-  if (logged == "true") {
+  if (user) {
     // Modifications si L'utilisateur est connecté
     // console.log("L'utilisateur est connecté");
     logOut.textContent = "logout";
@@ -121,17 +122,15 @@ function logginAdmin() {
   } else {
     // L'utilisateur n'est pas connecté
     // console.log("L'utilisateur n'est pas connecté");
-    logOut.textContent = "login";
   }
 }
 
 /****Suprimer le userToken du local storage si click sur log Out******/
 function logoutAdmin() {
   logOut.addEventListener("click", () => {
-    if (logged === "true") {
+    if (user) {
       window.sessionStorage.setItem("token", "");
       logOut.textContent = "login";
-      window.sessionStorage.setItem("logged", false);
       window.sessionStorage.setItem("userId", "");
       window.location.href = "index.html";
     } else {

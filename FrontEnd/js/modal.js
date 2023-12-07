@@ -11,12 +11,11 @@ const formAddWorks = document.querySelector(".modalAddWorks form");
 const inputTitle = document.querySelector("#title");
 const inputCategory = document.querySelector("#categoryInput");
 const inputFile = document.querySelector("#file");
-const token = window.sessionStorage.getItem("token");
 const previewImage = document.getElementById("previewImage");
 //Fonction Principale pour l'affichage des works dans la Modale
 function mainModal() {
   displayCategoryModal();
-  if (logged == "true") {
+  if (user) {
     displayModal();
     displayWorksModal();
     closeModalGallery();
@@ -81,7 +80,7 @@ function closeModalGallery() {
   body.addEventListener("click", (e) => {
     if (e.target == modalContent) {
       modalContent.style.display = "none";
-      console.log(e.target);
+      // console.log(e.target);
     }
   });
 }
