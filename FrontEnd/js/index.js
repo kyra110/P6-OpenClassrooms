@@ -33,6 +33,7 @@ async function main() {
   createAllButtons();
   logginAdmin();
   logoutAdmin();
+  displayByCategory();
 }
 main();
 
@@ -95,16 +96,17 @@ async function displayByCategory() {
       works.forEach((work) => {
         if (btnId == work.categoryId) {
           createWork(work);
+          // console.log(work);
         }
         if (btnId == "0") {
           createWork(work);
+          // console.log(work);
         }
       });
     });
   });
   // console.log(buttons);
 }
-displayByCategory();
 
 /*****Partie ou l'utilisateur et conecté*****/
 function logginAdmin() {

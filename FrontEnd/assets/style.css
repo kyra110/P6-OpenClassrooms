@@ -263,7 +263,13 @@ footer nav ul {
 /******************Page login************************/
 /*lien Mot de passe oublié du form de conexion*/
 .main-login {
-  height: 750px;
+  min-height: 650px;
+  margin-top: 90px;
+}
+.main-login #contact form input[type=submit] {
+  height: 100%;
+  padding: 10px 0px;
+  font-size: 0.85rem;
 }
 
 .form__lien {
