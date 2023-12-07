@@ -33,7 +33,7 @@ mainModal();
 function displayModal() {
   const modeEdition = document.querySelector(".div-edit span");
   modeEdition.addEventListener("click", () => {
-    console.log("mode édition click");
+    // console.log("mode édition click");
     modalContent.style.display = "flex";
     modalPortfolio.style.display = "flex";
     modalAddWorks.style.display = "none";
@@ -44,6 +44,7 @@ function displayWorksModal() {
   modalGallery.innerHTML = "";
   getWorks().then((works) => {
     //Boucle qui parcours  nos works
+    // console.log(works);
     works.forEach((work) => {
       createWorkModal(work);
     });
@@ -57,6 +58,7 @@ function createWorkModal(work) {
   trash.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
   trash.id = work.id;
   img.src = work.imageUrl;
+  img.alt = work.title;
   figure.appendChild(img);
   figure.appendChild(trash);
   modalGallery.appendChild(figure);
@@ -103,7 +105,7 @@ const deleteWorkID = {
 function deleteWork(trash) {
   trash.addEventListener("click", (e) => {
     const workID = trash.id;
-    console.log(trash);
+    // console.log(trash);
     fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
       () => {
         displayWorksModal();
@@ -140,7 +142,7 @@ function addWorks() {
     formData.append("image", inputFile.files[0]);
     formData.append("title", inputTitle.value);
     formData.append("category", inputCategory.value);
-    console.log(inputFile.files[0]);
+    // console.log(inputFile.files[0]);
     fetch("http://localhost:5678/api/works", {
       method: "POST",
       body: formData,
@@ -155,7 +157,7 @@ function addWorks() {
         return response.json();
       })
       .then((data) => {
-        console.log("Fichier envoyé avec succès :", data);
+        // console.log("Fichier envoyé avec succès :", data);
         displayWorksModal();
         displayWorksGallery();
         formAddWorks.reset();
@@ -184,7 +186,7 @@ async function displayCategoryModal() {
 function prevImg() {
   inputFile.addEventListener("change", () => {
     const file = inputFile.files[0];
-    console.log(file);
+    // console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {

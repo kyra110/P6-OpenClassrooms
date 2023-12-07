@@ -53,6 +53,7 @@ function createWork(work) {
   const figcaption = document.createElement("figcaption");
   figcaption.textContent = work.title;
   img.src = work.imageUrl;
+  img.alt = work.title;
   figure.appendChild(img);
   figure.appendChild(figcaption);
   gallery.appendChild(figure);
