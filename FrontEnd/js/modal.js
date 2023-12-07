@@ -47,21 +47,23 @@ function displayWorksModal() {
     works.forEach((work) => {
       createWorkModal(work);
     });
+    deleteWork();
   });
 }
 // création des balises et injection des donnés a partir du fetchWorks
 function createWorkModal(work) {
   const figure = document.createElement("figure");
   const img = document.createElement("img");
-  const trash = document.createElement("span");
-  trash.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+  const span = document.createElement("span")
+  const trash = document.createElement("i");
+  trash.classList.add("fa-solid", "fa-trash-can");
   trash.id = work.id;
   img.src = work.imageUrl;
   img.alt = work.title;
+  span.appendChild(trash)
   figure.appendChild(img);
-  figure.appendChild(trash);
+  figure.appendChild(span);
   modalGallery.appendChild(figure);
-  deleteWork(trash);
 }
 //Gestion de la fermeture des modales
 function closeModalGallery() {
@@ -86,9 +88,6 @@ function closeModalGallery() {
 }
 
 //Supression des works grace a la méthode DELETE & au Token user depuis la poubelle de la modale
-
-// console.log(token);
-
 //Objet de paramétrage pour requette DELETE avec token
 const deleteWorkID = {
   method: "DELETE",
@@ -99,18 +98,21 @@ const deleteWorkID = {
   mode: "cors",
   credentials: "same-origin",
 };
-
 //Supéssion au click sur la poubelle et mise a jour modale et gallery principale
-function deleteWork(trash) {
-  trash.addEventListener("click", (e) => {
-    const workID = trash.id;
-    // console.log(trash);
-    fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
-      () => {
-        displayWorksModal();
-        displayWorksGallery();
-      }
-    );
+function deleteWork() {
+  const trashs = document.querySelectorAll(".fa-trash-can")
+  // console.log(trashs);
+  trashs.forEach(trash => {
+    trash.addEventListener("click", (e) => {
+      const workID = trash.id;
+      // console.log(trash);
+      fetch(`http://localhost:5678/api/works/${workID}`, deleteWorkID).then(
+        () => {
+          displayWorksModal();
+          displayWorksGallery();
+        }
+      );
+    });
   });
 }
 
