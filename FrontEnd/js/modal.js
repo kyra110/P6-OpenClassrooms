@@ -7,7 +7,7 @@ const buttonAddPhoto = document.querySelector(".container-button button");
 const modalPortfolio = document.querySelector(".modalPortfolio");
 const modalAddWorks = document.querySelector(".modalAddWorks");
 //Variables Pour le form
-const formAddWorks = document.querySelector(".modalAddWorks form");
+const formAddWorks = document.querySelector("#formAddWorks");
 const inputTitle = document.querySelector("#title");
 const inputCategory = document.querySelector("#categoryInput");
 const inputFile = document.querySelector("#file");
@@ -139,11 +139,7 @@ function returnToModalPortfolio() {
 function addWorks() {
   formAddWorks.addEventListener("submit", (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", inputFile.files[0]);
-    formData.append("title", inputTitle.value);
-    formData.append("category", inputCategory.value);
-    // console.log(inputFile.files[0]);
+    const formData = new FormData(formAddWorks);
     fetch("http://localhost:5678/api/works", {
       method: "POST",
       body: formData,

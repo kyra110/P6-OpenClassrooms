@@ -61,12 +61,12 @@
 					<span class="arrow-left"><i class="fa-solid fa-arrow-left"></i></span>
 					<span class="xmark"><i class="fa-solid fa-xmark"></i></span>
 					<h3>Ajout photo</h3>
-					<form>
+					<form id="formAddWorks">
 						<div class="containerAddPhoto">
 							<i class="fa-regular fa-image"></i>
 							<label for="file" class="labelFile">+ Ajouter photo</label>
 							<p>jpg,png : 4mo max</p>
-							<input type="file" name="imageUrl" id="file" accept="image/jpg, image/png" required>
+							<input type="file" name="image" id="file" accept="image/jpg, image/png" required>
 							<img id="previewImage" src="#" alt="Aperçu de l'image">
 						</div>
 						<label for="title">Titre</label>
@@ -75,7 +75,7 @@
 						<select list="categories" id="categoryInput" name="category" required>
 						</select>
 						<div class="container-button-add-work ">
-							<button class="button-add-work">Valider</button>
+							<button type="submit" class="button-add-work">Valider</button>
 						</div>
 					</form>
 				</section>
