@@ -134,11 +134,11 @@ function returnToModalPortfolio() {
     modalAddWorks.style.display = "none";
   });
 }
-
-// Récupération des Valeurs du Formulaire
+//Function d'ajout d'un nouveau projet
 function addWorks() {
   formAddWorks.addEventListener("submit", (e) => {
     e.preventDefault();
+    // Récupération des Valeurs du Formulaire
     const formData = new FormData(formAddWorks);
     fetch("http://localhost:5678/api/works", {
       method: "POST",
