@@ -4,7 +4,8 @@ const gallery = document.querySelector(".gallery");
 const body = document.querySelector("body");
 const containerFiltres = document.querySelector(".container-filtres");
 // Variables pour la partie conexion
-const loged = window.localStorage.loged === "true";
+const token = window.sessionStorage.getItem("token");
+const user = window.sessionStorage.getItem("userId");
 const logOut = document.getElementById("login-link");
 const sectionPortfolio = document.querySelector("#portfolio");
 const sectionPortfolioH2 = document.querySelector("#portfolio h2");
@@ -32,11 +33,13 @@ async function main() {
   createAllButtons();
   logginAdmin();
   logoutAdmin();
+  displayByCategory();
 }
 main();
 
 /* affichage des works dans le dom */
 function displayWorksGallery() {
+  gallery.innerHTML = "";
   getWorks().then((data) => {
     //cree pour chaque élément du tableau
     // console.log(data);
@@ -52,6 +55,7 @@ function createWork(work) {
   const figcaption = document.createElement("figcaption");
   figcaption.textContent = work.title;
   img.src = work.imageUrl;
+  img.alt = work.title;
   figure.appendChild(img);
   figure.appendChild(figcaption);
   gallery.appendChild(figure);
@@ -61,7 +65,7 @@ function createWork(work) {
 /*Boucle for pour creer les bouton par catégorie*/
 function createAllButtons() {
   getCategory().then((data) => {
-    console.log(data);
+    // console.log(data);
     data.forEach((category) => {
       createButton(category);
     });
@@ -73,8 +77,8 @@ function createButton(category) {
   btn.textContent = category.name;
   btn.id = category.id;
   containerFiltres.appendChild(btn);
-  console.log(category.id);
-  console.log(category.name);
+  // console.log(category.id);
+  // console.log(category.name);
 }
 
 // Trie par classe sur les boutons filtres
@@ -92,24 +96,25 @@ async function displayByCategory() {
       works.forEach((work) => {
         if (btnId == work.categoryId) {
           createWork(work);
+          // console.log(work);
         }
         if (btnId == "0") {
           createWork(work);
+          // console.log(work);
         }
       });
     });
   });
-  console.log(buttons);
+  // console.log(buttons);
 }
-displayByCategory();
-// Vérifiez si l'utilisateur est conecté ou non
+
 /*****Partie ou l'utilisateur et conecté*****/
 function logginAdmin() {
-  if (loged) {
+  if (user) {
     // Modifications si L'utilisateur est connecté
-    console.log("L'utilisateur est connecté");
+    // console.log("L'utilisateur est connecté");
     logOut.textContent = "logout";
-    document.body.insertAdjacentHTML("beforebegin", adminConexionUP);
+    document.body.insertAdjacentHTML("afterbegin", adminConexionUP);
     spanEdit.innerHTML = adminConexionDown;
     divEdit.classList.add("div-edit");
     divEdit.appendChild(sectionPortfolioH2);
@@ -118,18 +123,17 @@ function logginAdmin() {
     containerFiltres.style = "display:none";
   } else {
     // L'utilisateur n'est pas connecté
-    console.log("L'utilisateur n'est pas connecté");
-    logOut.textContent = "login";
+    // console.log("L'utilisateur n'est pas connecté");
   }
 }
 
 /****Suprimer le userToken du local storage si click sur log Out******/
 function logoutAdmin() {
   logOut.addEventListener("click", () => {
-    if (loged) {
-      window.localStorage.token = "";
+    if (user) {
+      window.sessionStorage.setItem("token", "");
       logOut.textContent = "login";
-      window.localStorage.loged = false;
+      window.sessionStorage.setItem("userId", "");
       window.location.href = "index.html";
     } else {
       //renvoi sur page conexion
