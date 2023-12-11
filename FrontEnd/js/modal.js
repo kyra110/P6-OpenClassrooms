@@ -8,6 +8,8 @@ const modalPortfolio = document.querySelector(".modalPortfolio");
 const modalAddWorks = document.querySelector(".modalAddWorks");
 //Variables Pour le form
 const formAddWorks = document.querySelector("#formAddWorks");
+const labelFile = document.querySelector("#formAddWorks label")
+const paragraphFile = document.querySelector("#formAddWorks p")
 const inputTitle = document.querySelector("#title");
 const inputCategory = document.querySelector("#categoryInput");
 const inputFile = document.querySelector("#file");
@@ -189,6 +191,8 @@ function prevImg() {
       reader.onload = function (e) {
         previewImage.src = e.target.result;
         previewImage.style.display = "block";
+        // labelFile.style.display ="none"
+        // paragraphFile.style.display ="none"
       };
       reader.readAsDataURL(file);
     } else {
