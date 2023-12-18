@@ -77,13 +77,19 @@ function closeModalGallery() {
   //Fermuture de la modal sur la croix 2
   const xmarkModal2 = document.querySelector(".modalAddWorks span .fa-xmark");
   xmarkModal2.addEventListener("click", () => {
+    //Supréssion de la prewiew a clik sur retour dans la modale
+    inputFile.value = "";
+    previewImage.style.display = "none";
     modalContent.style.display = "none";
   });
 
   //Fermeture de la modal sur le container grisé
   body.addEventListener("click", (e) => {
     if (e.target == modalContent) {
-      modalContent.style.display = "none";
+      //Supréssion de la prewiew a clik sur retour dans la modale
+    inputFile.value = "";
+    previewImage.style.display = "none";
+    modalContent.style.display = "none";
       // console.log(e.target);
     }
   });
@@ -132,6 +138,10 @@ function returnToModalPortfolio() {
     ".modalAddWorks .fa-arrow-left"
   );
   arrowLeftModalWorks.addEventListener("click", () => {
+    //Supréssion de la prewiew a clik sur retour dans la modale
+    inputFile.value = "";
+    previewImage.style.display = "none";
+    console.log("coucou");
     modalPortfolio.style.display = "flex";
     modalAddWorks.style.display = "none";
   });
